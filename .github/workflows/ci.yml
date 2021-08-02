@@ -170,29 +170,29 @@ jobs:
         path: /cores
         if-no-files-found: ignore
 
-  lint-rust:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout sources
-      uses: actions/checkout@v2
+  # lint-rust:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout sources
+  #     uses: actions/checkout@v2
 
-    - name: Cache cargo folder
-      uses: actions/cache@v2
-      with:
-        path: ~/.cargo
-        key: lint-cargo-${{ hashFiles('Cargo.lock') }}
+  #   - name: Cache cargo folder
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: ~/.cargo
+  #       key: lint-cargo-${{ hashFiles('Cargo.lock') }}
 
-    - name: Install rust toolchain
-      uses: hecrj/setup-rust-action@v1.3.4
-      with:
-        rust-version: stable
-        components: clippy, rustfmt
+  #   - name: Install rust toolchain
+  #     uses: hecrj/setup-rust-action@v1.3.4
+  #     with:
+  #       rust-version: stable
+  #       components: clippy, rustfmt
 
-    - name: cargo fmt
-      run: cargo fmt --all -- --check
+  #   - name: cargo fmt
+  #     run: cargo fmt --all -- --check
 
-    - name: cargo clippy
-      run: cargo clippy --all-targets --workspace -- -D warnings
+  #   - name: cargo clippy
+  #     run: cargo clippy --all-targets --workspace -- -D warnings
 
   # adapted from https://github.com/taiki-e/pin-project/blob/5878410863f5f25e21f7cba97b035501749850f9/.github/workflows/ci.yml#L136-L167
   # further enchanced following solutions to
