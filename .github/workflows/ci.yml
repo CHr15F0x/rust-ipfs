@@ -1,10 +1,10 @@
-on:
-  push:
-    branches:
-      - trying
-      - staging
-  pull_request:
-    branches: '*'
+on: push
+  # push:
+  #   branches:
+  #     - trying
+  #     - staging
+  # pull_request:
+  #   branches: '*'
 
 name: Rust IPFS
 
@@ -17,33 +17,33 @@ jobs:
         - rust: stable
 
         platform:
-        - target: x86_64-unknown-linux-gnu
-          host: ubuntu-latest
-          cross: false
+        # - target: x86_64-unknown-linux-gnu
+        #   host: ubuntu-latest
+        #   cross: false
 
-        - target: x86_64-apple-darwin
-          host: macos-latest
-          cross: false
+        # - target: x86_64-apple-darwin
+        #   host: macos-latest
+        #   cross: false
 
         - target: x86_64-pc-windows-msvc
           host: windows-latest
           cross: false
 
-        - target: armv7-linux-androideabi
-          host: ubuntu-latest
-          cross: true
+        # - target: armv7-linux-androideabi
+        #   host: ubuntu-latest
+        #   cross: true
 
-        - target: aarch64-linux-android
-          host: ubuntu-latest
-          cross: true
+        # - target: aarch64-linux-android
+        #   host: ubuntu-latest
+        #   cross: true
 
-        - target: x86_64-apple-ios
-          host: macos-latest
-          cross: true
+        # - target: x86_64-apple-ios
+        #   host: macos-latest
+        #   cross: true
 
-        - target: aarch64-apple-ios
-          host: macos-latest
-          cross: true
+        # - target: aarch64-apple-ios
+        #   host: macos-latest
+        #   cross: true
 
     env:
       RUST_BACKTRACE: 1
@@ -104,7 +104,8 @@ jobs:
         vcpkgDirectory: '${{ runner.workspace }}/vcpkg'
         vcpkgTriplet: 'x64-windows'
         vcpkgArguments: 'openssl'
-        vcpkgGitCommitId: 'ffa41582f78478812c836a6e8ce315fb27431182'  # ok for openssl-sys v0.9.58
+        # vcpkgGitCommitId: 'ffa41582f78478812c836a6e8ce315fb27431182'  # ok for openssl-sys v0.9.58
+        vcpkgGitCommitId: 'fd78df59b0f656aefe96e39533130454aa957c00'  # ok for openssl-sys v0.9.58
 
     - name: Install rust toolchain
       uses: hecrj/setup-rust-action@v1.3.4
@@ -198,14 +199,14 @@ jobs:
   # https://github.com/bors-ng/bors-ng/issues/1115 -- bors now considers the
   # skipped task a failure, or overrides the status for a task with a same name
   # with the one which came later.
-  ci-success:
-      # this is read by bors
-      name: ci
-      if: github.event_name == 'push' && success()
-      needs:
-        - ci-matrix
-        - lint-rust
-      runs-on: ubuntu-latest
-      steps:
-        - name: Mark the job as a success
-          run: exit 0
+  # ci-success:
+  #     # this is read by bors
+  #     name: ci
+  #     if: github.event_name == 'push' && success()
+  #     needs:
+  #       - ci-matrix
+  #       - lint-rust
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - name: Mark the job as a success
+  #         run: exit 0
