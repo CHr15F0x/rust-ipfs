@@ -430,6 +430,12 @@ impl NetworkBehaviour for Pubsub {
                         score,
                     });
                 }
+                NetworkBehaviourAction::CloseConnection { peer_id, connection } => {
+                    return Poll::Ready(NetworkBehaviourAction::CloseConnection {
+                        peer_id,
+                        connection,
+                    });
+                }
             }
         }
     }
